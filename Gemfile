@@ -68,6 +68,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "factory_bot_rails"
+  gem "shoulda-matchers", "~> 6.0"
 end
 
 gem "tailwindcss-rails", "~> 2.3"
