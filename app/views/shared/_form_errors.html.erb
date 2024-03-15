@@ -1,0 +1,21 @@
+<% if object && object.errors.present? %>
+  <section>
+    <div class="relative items-center w-full mx-auto max-w-7xl">
+      <div class="py-2 pb-4 bg-red-100">
+        <div class="flex">
+          <div class="ml-3">
+            <div class="mt-2 text-sm text-gray-700">
+              <ul role="list" class="pl-5 space-y-1 list-disc">
+                <% object.errors.each do |err| %>
+                  <li><%= err.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+
