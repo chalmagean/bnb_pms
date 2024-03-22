@@ -7,6 +7,12 @@ module.exports = {
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}'
   ],
+  safelist: [
+    'bg-lime-50',
+    'bg-lime-500',
+    'bg-lime-700',
+    'border-lime-400'
+  ],
   theme: {
     extend: {
       fontFamily: {
