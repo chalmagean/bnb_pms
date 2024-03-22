@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
       sign_in("user", user)
       redirect_to dashboard_path
     else
-      # ... show errors
+      render :new, status: :unprocessable_entity
     end
   end
 

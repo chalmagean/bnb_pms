@@ -21,4 +21,11 @@ RSpec.describe "Signup", type: :system do
     expect(page).to have_text("My Property Dashboard")
     expect(page).to have_text("john@email.com")
   end
+
+  it "shows form errors" do
+    visit root_path
+    click_on "signup"
+    click_on "signup-submit"
+    expect(page).to have_text("First name can't be blank")
+  end
 end
