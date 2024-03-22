@@ -39,6 +39,15 @@ class RegistrationForm
     )
   end
 
+  def save
+    if valid?
+      account.save
+      user.save
+      account.users << user
+      account.properties << property
+    end
+  end
+
   private
 
     def user_valid?
@@ -59,6 +68,7 @@ class RegistrationForm
     end
 
     def property_valid?
+      property.account = account
       unless property.valid?
         property.errors.each do |error|
           attr = "property_#{error.attribute}".to_sym

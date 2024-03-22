@@ -54,4 +54,75 @@ RSpec.describe RegistrationForm, type: :model do
       expect(form.property).to be_a_new(Property)
     end
   end
+
+  describe "#save" do
+    it "saves all models if they're valid" do
+      form = RegistrationForm.new(
+        first_name: "John",
+        last_name: "Doe",
+        email: "joe@email.com",
+        password: "password",
+        password_confirmation: "password",
+        property_name: "My Property",
+        property_address: "Main Str. 123",
+        property_email: "prop@email.com",
+        account_name: "Acme Inc."
+      )
+      form.save
+      expect(User.count).to eq(1)
+      expect(Account.count).to eq(1)
+      expect(Property.count).to eq(1)
+    end
+
+    context "when account data is missing" do
+      it "does not save any of the models" do
+        form = RegistrationForm.new(
+          first_name: "John",
+          last_name: "Doe",
+          email: "joe@email.com",
+          password: "password",
+          password_confirmation: "password",
+          property_name: "My Property",
+          property_address: "Main Str. 123",
+          property_email: "prop@email.com"
+        )
+        form.save
+        expect(User.count).to eq(0)
+        expect(Account.count).to eq(0)
+        expect(Property.count).to eq(0)
+      end
+    end
+
+    context "when property data is missing" do
+      it "does not save any of the models" do
+        form = RegistrationForm.new(
+          first_name: "John",
+          last_name: "Doe",
+          email: "joe@email.com",
+          password: "password",
+          password_confirmation: "password",
+          account_name: "Acme Inc."
+        )
+        form.save
+        expect(User.count).to eq(0)
+        expect(Account.count).to eq(0)
+        expect(Property.count).to eq(0)
+      end
+    end
+
+    context "when user data is missing" do
+      it "does not save any of the models" do
+        form = RegistrationForm.new(
+          property_name: "My Property",
+          property_address: "Main Str. 123",
+          property_email: "prop@email.com",
+          account_name: "Acme Inc."
+        )
+        form.save
+        expect(User.count).to eq(0)
+        expect(Account.count).to eq(0)
+        expect(Property.count).to eq(0)
+      end
+    end
+  end
 end

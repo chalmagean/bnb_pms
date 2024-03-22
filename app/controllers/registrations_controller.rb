@@ -6,13 +6,8 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @registration_form = RegistrationForm.new(registration_params)
 
-    if @registration_form.valid?
-      account = @registration_form.account
-      user = @registration_form.user
-      user.save
-      account.users << user
-      account.properties << @registration_form.property
-      sign_in("user", user)
+    if @registration_form.save
+      sign_in("user", @registration_form.user)
       redirect_to dashboard_path
     else
       render :new, status: :unprocessable_entity
