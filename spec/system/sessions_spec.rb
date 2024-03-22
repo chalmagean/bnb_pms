@@ -19,6 +19,6 @@ RSpec.describe "Sessiosn", type: :system do
     fill_in "account-name", with: "Acme Inc."
     click_on "signup-submit"
     click_on "sign-out"
-    expect(page).to have_text("You've been signed out.")
+    expect(page).to have_text("Signed out successfully")
   end
 end
