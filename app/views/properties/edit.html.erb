@@ -1,0 +1,20 @@
+<%= form_with model: current_property, data: { controller: "nested-form", nested_form_wrapper_selector_value: ".nested-form-wrapper" } do |f| %>
+  <template data-nested-form-target="template">
+    <%= f.fields_for :rooms, Room.new, child_index: "NEW_RECORD" do |room_fields| %>
+      <%= render "room_form", f: room_fields %>
+    <% end %>
+  </template>
+
+  <%= f.fields_for :rooms do |room_fields| %>
+    <%= render "room_form", f: room_fields %>
+  <% end %>
+
+  <!-- Inserted elements will be injected before that target. -->
+  <div data-nested-form-target="target"></div>
+
+  <div class="block">
+    <button type="button" id="add-room" data-action="nested-form#add">Add room</button>
+  </div>
+
+  <%= f.submit "Save property", id: "add-room-submit" %>
+<% end %>
