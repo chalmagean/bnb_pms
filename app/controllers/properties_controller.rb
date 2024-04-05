@@ -15,7 +15,10 @@ class PropertiesController < ApplicationController
       params
         .require(:property)
         .permit(
-          rooms_attributes: %i[id _destroy name kind]
+          rooms_attributes: [
+            :id, :_destroy, :name, :kind,
+            availabilities_attributes: %i[id _destroy date rate]
+          ]
         )
     end
 end

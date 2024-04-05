@@ -1,0 +1,26 @@
+<%= form_with model: current_property do |f| %>
+<table>
+  <tr>
+    <th></th>
+    <% (1..@days).each do |day| %>
+      <th><%= day %></th>
+    <% end %>
+  </tr>
+  <% current_property.rooms.each do |room| %>
+    <%= f.fields_for :rooms, room do |fr| %>
+      <tr>
+        <td><%= room.name %></td>
+        <% (@date_start..@date_end).each do |date| %>
+          <%= fr.fields_for :availabilities do |fa| %>
+            <td>
+              <%= fa.hidden_field :date, value: date %>
+              <%= fa.text_field :rate, value: @availabilities.find { |t| t.first == date.to_s }&.last %>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+<%= f.submit "Update availability" %>
+<% end %>
