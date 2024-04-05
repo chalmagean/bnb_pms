@@ -7,8 +7,10 @@ RSpec.describe "Property setup", type: :system do
     click_on "add-room"
     room_forms = all(".nested-form-wrapper")
     within(room_forms.first) do
-      fill_in "Room name", with: "Room 1"
-      select "double", from: "Room type"
+      # TODO: find a different selector for the room name and type
+      # as the current one is not unique.
+      find(".room-name").set("Room 1")
+      find(".room-type").set("double")
     end
     click_on "add-room-submit"
     expect(page).to have_text("Property updated successfully")

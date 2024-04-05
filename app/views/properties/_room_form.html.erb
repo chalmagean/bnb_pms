@@ -1,9 +1,24 @@
-<div class="nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
-  <%= f.label :name, "Room name" %>
-  <%= f.text_field :name, class: "room-name" %>
-  <%= f.label :kind, "Room type" %>
-  <%= f.select :kind, Room::KINDS, class: "room-kind" %>
+<div class="nested-form-wrapper mt-2 grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6" data-new-record="<%= f.object.new_record? %>">
+  <div class="sm:col-span-4">
+    <div class="mt-2">
+      <%= f.text_field :name, class: "room-name block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+    </div>
+  </div>
 
-  <button type="button" data-action="nested-form#remove">Remove room</button>
-  <%= f.hidden_field :_destroy %>
+  <div class="sm:col-span-1">
+    <div class="mt-2">
+      <%= f.select :kind, Room::KINDS, {}, class: "room-type block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" %>
+    </div>
+  </div>
+
+  <div class="sm:col-span-1">
+    <div class="mt-4">
+      <button type="button" data-action="nested-form#remove">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+      </button>
+      <%= f.hidden_field :_destroy %>
+    </div>
+  </div>
 </div>
