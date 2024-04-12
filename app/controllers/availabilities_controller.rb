@@ -6,7 +6,6 @@ class AvailabilitiesController < ApplicationController
     @availabilities = Availability
       .joins(room: :property)
       .where(date: @date_start..@date_end, properties: { id: 1 })
-      .pluck(:date, :rate)
-      .map! { |date, rate| [date.to_s, rate] }
+      .all
   end
 end

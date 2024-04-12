@@ -6,21 +6,24 @@
       <th><%= day %></th>
     <% end %>
   </tr>
-  <% current_property.rooms.each do |room| %>
-    <%= f.fields_for :rooms, room do |fr| %>
-      <tr>
-        <td><%= room.name %></td>
-        <% (@date_start..@date_end).each do |date| %>
-          <%= fr.fields_for :availabilities do |fa| %>
-            <td>
-              <%= fa.hidden_field :date, value: date %>
-              <%= fa.text_field :rate, value: @availabilities.find { |t| t.first == date.to_s }&.last %>
-            </td>
+  <!-- property[rooms_attributes][0][id] -->
+  <% current_property.rooms.each_with_index do |room, ri| %>
+    <input name="property[rooms_attributes][<%= ri %>][id]" type="hidden" value="<%= room.id %>" />
+    <tr>
+      <td><%= room.name %></td>
+      <% (@date_start..@date_end).each_with_index do |date, i| %>
+        <% availability = @availabilities.find { |a| a.date == date && a.room_id == room.id } %>
+        <!-- property[rooms_attributes][0][availabilities_attributes][0][rate] -->
+        <td>
+          <input name="property[rooms_attributes][<%= ri %>][availabilities_attributes][<%= i %>][rate]" type="text" value="<%= availability&.rate %>" id="availability-<%= date %>-<%= room.id %>" />
+          <input name="property[rooms_attributes][<%= ri %>][availabilities_attributes][<%= i %>][date]" type="hidden" value="<%= date %>" />
+          <% if availability %>
+            <input name="property[rooms_attributes][<%= ri %>][availabilities_attributes][<%= i %>][id]" type="hidden" value="<%= availability.id %>" />
           <% end %>
-        <% end %>
-      </tr>
-    <% end %>
+        </td>
+      <% end %>
+    </tr>
   <% end %>
 </table>
-<%= f.submit "Update availability" %>
+<%= f.submit "Update availability", id: "availability-submit" %>
 <% end %>
