@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_05_104311) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_19_101254) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "address"
@@ -27,8 +27,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_104311) do
     t.decimal "rate", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "room_id", null: false
-    t.index ["room_id"], name: "index_availabilities_on_room_id"
+    t.integer "property_id", null: false
+    t.integer "quantity", default: 0, null: false
+    t.index ["property_id"], name: "index_availabilities_on_property_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -80,7 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_104311) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "availabilities", "rooms"
+  add_foreign_key "availabilities", "properties"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"

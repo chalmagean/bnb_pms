@@ -1,29 +1,31 @@
 <%= form_with model: current_property do |f| %>
-<table>
-  <tr>
-    <th></th>
-    <% (1..@days).each do |day| %>
-      <th><%= day %></th>
+  <div class="relative overflow-x-scroll overflow-y-visible pl-20">
+    <table>
+      <tr>
+        <th></th>
+        <% (1..@days).each do |day| %>
+          <th><%= day %></th>
+        <% end %>
+      </tr>
+      <!-- property[rooms_attributes][0][id] -->
+      <% Room::KINDS.each do |kind| %>
+      <tr>
+        <th class="absolute left-0"><%= kind %></th>
+        <% (@date_start..@date_end).each_with_index do |date, i| %>
+          <% availability = @availabilities.find { |a| a.date == date && a.room_type == kind } %>
+          <td>
+            <input name="property[availabilities_attributes][<%= kind %>_<%= i %>][rate]" type="text" value="<%= availability&.rate %>"  class="w-16" id="availability-rate-<%= date %>-<%= kind %>" />
+            <input name="property[availabilities_attributes][<%= kind %>_<%= i %>][quantity]" type="text" value="<%= availability&.quantity %>"  class="w-16" id="availability-qty-<%= date %>-<%= kind %>" />
+            <input name="property[availabilities_attributes][<%= kind %>_<%= i %>][room_type]" type="hidden" value="<%= kind %>" />
+            <input name="property[availabilities_attributes][<%= kind %>_<%= i %>][date]" type="hidden" value="<%= date %>" />
+            <% if availability %>
+              <input name="property[availabilities_attributes][<%= kind %>_<%= i %>][id]" type="hidden" value="<%= availability.id %>" />
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
     <% end %>
-  </tr>
-  <!-- property[rooms_attributes][0][id] -->
-  <% current_property.rooms.each_with_index do |room, ri| %>
-    <input name="property[rooms_attributes][<%= ri %>][id]" type="hidden" value="<%= room.id %>" />
-    <tr>
-      <td><%= room.name %></td>
-      <% (@date_start..@date_end).each_with_index do |date, i| %>
-        <% availability = @availabilities.find { |a| a.date == date && a.room_id == room.id } %>
-        <!-- property[rooms_attributes][0][availabilities_attributes][0][rate] -->
-        <td>
-          <input name="property[rooms_attributes][<%= ri %>][availabilities_attributes][<%= i %>][rate]" type="text" value="<%= availability&.rate %>" id="availability-<%= date %>-<%= room.id %>" />
-          <input name="property[rooms_attributes][<%= ri %>][availabilities_attributes][<%= i %>][date]" type="hidden" value="<%= date %>" />
-          <% if availability %>
-            <input name="property[rooms_attributes][<%= ri %>][availabilities_attributes][<%= i %>][id]" type="hidden" value="<%= availability.id %>" />
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+  </table>
+</div>
 <%= f.submit "Update availability", id: "availability-submit" %>
 <% end %>
