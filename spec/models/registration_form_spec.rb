@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe RegistrationForm, type: :model do
-  it "validate the user model" do
+  it "validates the user model" do
     form = RegistrationForm.new
     form.valid?
     expect(form.errors.messages[:email]).to include("can't be blank")

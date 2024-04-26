@@ -1,0 +1,15 @@
+<h1>Reservations</h1>
+
+<%= link_to "New reservation", new_reservation_path, id: "new-reservation", class: "my-4 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+
+<% @reservations.each do |reservation| %>
+  <div>
+    <% reservation.guests.each do |guest| %>
+      <%= guest.first_name %> <%= guest.last_name %>
+    <% end %>
+    <%= reservation.room_type.titleize %>
+    <%= reservation.quantity %>
+    <%= reservation.check_in.strftime("%d-%m-%Y") %>
+    <%= reservation.check_out.strftime("%d-%m-%Y") %>
+  </div>
+<% end %>

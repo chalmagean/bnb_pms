@@ -4,6 +4,7 @@ class Property < ApplicationRecord
   validates :email, presence: true
   belongs_to :account
   has_many :rooms, dependent: :destroy
+  has_many :reservations, dependent: :destroy
   has_many :availabilities, dependent: :destroy
 
   accepts_nested_attributes_for :rooms,

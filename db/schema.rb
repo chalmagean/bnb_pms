@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_101254) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_26_114832) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "address"
@@ -30,6 +30,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_101254) do
     t.integer "property_id", null: false
     t.integer "quantity", default: 0, null: false
     t.index ["property_id"], name: "index_availabilities_on_property_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guests_reservations", id: false, force: :cascade do |t|
+    t.integer "guest_id", null: false
+    t.integer "reservation_id", null: false
+    t.index ["guest_id", "reservation_id"], name: "index_guests_reservations_on_guest_id_and_reservation_id"
+    t.index ["reservation_id", "guest_id"], name: "index_guests_reservations_on_reservation_id_and_guest_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -56,6 +75,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_101254) do
     t.integer "account_id", null: false
     t.datetime "last_used_at"
     t.index ["account_id"], name: "index_properties_on_account_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.date "check_in", null: false
+    t.date "check_out", null: false
+    t.string "room_type", null: false
+    t.integer "quantity", null: false
+    t.integer "property_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_reservations_on_property_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -85,5 +115,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_101254) do
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
+  add_foreign_key "reservations", "properties"
   add_foreign_key "rooms", "properties"
 end

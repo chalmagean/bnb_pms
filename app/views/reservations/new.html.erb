@@ -1,0 +1,106 @@
+<div class="space-y-10 divide-y divide-gray-900/10">
+  <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+    <div class="px-4 sm:px-0">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">New reservation</h2>
+      <p class="mt-1 text-sm leading-6 text-gray-600">Add a new reservation</p>
+    </div>
+    <%= form_with model: @reservation_form, url: reservations_path, scope: :reservation, class: "bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2", data: { turbo: false } do |f| %>
+      <div class="px-4 py-6 sm:p-8">
+        <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12">
+          <div class="col-span-6">
+            <%= f.label :first_name, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.text_field :first_name, id: "reservation-first-name", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-6">
+            <%= f.label :last_name, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.text_field :last_name, id: "reservation-last-name", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-5">
+            <%= f.label :address, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.text_field :address, id: "reservation-address", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-4">
+            <%= f.label :city, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.text_field :city, id: "reservation-city", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-3">
+            <%= f.label :country, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.text_field :country, id: "reservation-country", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-6">
+            <%= f.label :email, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.email_field :email, id: "reservation-email", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-6">
+            <%= f.label :phone, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.text_field :phone, id: "reservation-phone", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-3">
+            <%= f.label :check_in, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.date_field :check_in, id: "reservation-check-in", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-3">
+            <%= f.label :check_out, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.date_field :check_out, id: "reservation-check-out", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-3">
+            <%= f.label :room_type, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.select :room_type, Room::KINDS, {}, id: "reservation-room-type", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-3">
+            <%= f.label :quantity, class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2">
+              <div class="flex rounded-md shadow-sm pl-3 ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <%= f.number_field :quantity, id: "reservation-qty", class: "block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+        <%= f.submit "Save reservation", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", id: "reservation-submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>
