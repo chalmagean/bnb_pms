@@ -62,7 +62,7 @@
                   <%= link_to "Update availability", property_availabilities_path(current_property), id: "edit-availability", class: "block px-4 py-2 text-sm text-gray-700" %>
                 </div>
               </div>
-                  <%#= link_to "Sign out", destroy_user_session_path, id: "sign-out", class: "block px-4 py-2 text-sm text-gray-700" %>
+                  <%= link_to "Sign out", destroy_user_session_path, id: "sign-out", class: "block px-4 py-2 text-sm text-gray-700" %>
               <% else %>
                 <%= link_to "Sign up", new_user_registration_path, id: "signup" %>
               <% end %>
