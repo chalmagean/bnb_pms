@@ -1,3 +1,12 @@
+<%= form_with url: property_availabilities_path(current_property), scope: :availability do |f| %>
+  <%= f.date_field :start_date, placeholder: "Start date", id: "availability-start-date" %>
+  <%= f.date_field :end_date, placeholder: "End date", id: "availability-end-date" %>
+  <%= f.select :room_type, Room::KINDS, {}, id: "availability-room-type" %>
+  <%= f.text_field :rate, id: "availability-rate" %>
+  <%= f.text_field :quantity, id: "availability-qty" %>
+  <%= f.submit "Submit", id: "bulk-availability-submit" %>
+<% end %>
+
 <%= form_with model: current_property do |f| %>
   <div class="">
     <table class="table-auto">
